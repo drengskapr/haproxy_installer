@@ -1,0 +1,11 @@
+---
+# tasks file for haproxy_installer
+
+- name: Debian mysql installation
+  import_tasks: haproxy_debian.yml
+  when: ansible_distribution == "Debian"
+
+- name: Ubuntu mysql installation
+  import_tasks: haproxy_ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+

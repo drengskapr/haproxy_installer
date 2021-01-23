@@ -1,0 +1,27 @@
+---
+
+  - name: Install prerequisites
+    apt:
+      pkg:
+        - gnupg2
+        - curl
+      update_cache: yes
+
+  - name: Add haproxy apt-key
+    apt_key:
+      url: https://haproxy.debian.net/bernat.debian.org.gpg
+      state: present
+
+  - name: Add haproxy repo
+    apt_repository:
+      repo: "deb http://haproxy.debian.net buster-backports-{{ haproxy_version }} main"
+      state: present
+      filename: haproxy
+      update_cache: yes
+
+  - name: Install haproxy
+    apt:
+      name: "haproxy={{ haproxy_version }}.*"
+      default_release: "buster-backports-{{ haproxy_version }}"
+      update_cache: yes
+

@@ -1,0 +1,18 @@
+---
+
+  - name: Install prerequisites
+    apt:
+      pkg:
+        - software-properties-common
+      update_cache: yes
+
+  - name: Add haproxy repo
+    apt_repository:
+      repo: "ppa:vbernat/haproxy-{{ haproxy_version }}"
+      state: present
+      update_cache: yes
+
+  - name: Install haproxy
+    apt:
+      name: "haproxy={{ haproxy_version }}.*"
+
